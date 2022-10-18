@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<head>
+<title>Food App</title>
+<!-- AngularJS1.x -->
+<script	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<!-- Include jQuery -->
+<script type="text/javascript"	src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script	src="https://adminlte.io/themes/AdminLTE/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://adminlte.io/themes/AdminLTE/bower_components/bootstrap/dist/css/bootstrap.min.css">
+</head>
+<body>
+<center><h1>My Food App</h1></center>
+<div ng-init="abc()" ng-app="foodapp" ng-controller="food-ctrl">
+<div class="dropdown">
+                    <button class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+                        Hotel Names
+                        <span class="caret"></span>
+                    </button>
+ <ul class="dropdown-menu">
+   <li ng-repeat="x in hotelList">{{x.hotelName}}</li>                         
+ </ul>
+ </div>
+ <div><center>
+ <table border="5px">
+ <tr><th>ID</th><th>Hotel Name</th><th>Hotel Type</th></tr>
+ <tr ng-repeat="h in hotelList"><td>{{h.id}}</td><td>{{h.hotelName}}</td><td>{{h.hotelType}}</td></tr>
+ </table>
+ </center>
+ </div>>
+ </div>
+</body>
+<script>
+var app=angular.module('foodapp',[]);
+app.controller('food-ctrl',function($scope,$http){
+$scope.hotelList=null;
+$scope.abc = function(){
+$http.get('/ho/getallhotelsordered').then(function(res){
+$scope.hotelList = res.data;
+});
+}
+
+
+});
+
+</script>
+</html>
